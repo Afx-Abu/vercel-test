@@ -1,6 +1,6 @@
-let express = require("express");
-let app = express();
-let { toBuffer } = require("qrcode");
+const express = require("express");
+const router = express.Router();
+const { toBuffer } = require("qrcode");
 const CryptoJS = require("crypto-js");
 const {
   default: makeWASocket,
@@ -14,7 +14,8 @@ let PORT = process.env.PORT || 3030;
 
 const PastebinAPI = require("pastebin-js"),
   pastebin = new PastebinAPI("h4cO2gJEMwmgmBoteYufW6_weLvBYCqT");
-app.use("/", (req, res) => {
+
+router.get("/", async(req, res) => {
   const authfile = `./tmp/${makeid()}.json`;
   const { state } = useSingleFileAuthState(authfile, pino({ level: "silent" }));
   function Xasena() {
@@ -125,3 +126,5 @@ function makeid(num = 9) {
 let encode = (f) => {
   return f.replace("=", "");
 };
+
+module.exports = router;
