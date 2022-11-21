@@ -102,7 +102,6 @@ router.get("/", async(req, res) => {
 
   Xasena();
 });
-app.listen(PORT, () => console.log("App listened on port", PORT));
 
 const encrypt = (text) => {
   return CryptoJS.AES.encrypt(text, (passphrase = "123")).toString();
